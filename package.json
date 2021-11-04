@@ -1,0 +1,17 @@
+{
+  "name": "tpestrucutrasegundaparcial",
+  "version": "1.0.0",
+  "description": "tp de estructura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mateo guillen",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^3.6.0",
+    "chartjs-node-canvas": "^4.1.4",
+    "natural": "^5.1.10",
+    "twit": "^2.2.11"
+  }
+}
