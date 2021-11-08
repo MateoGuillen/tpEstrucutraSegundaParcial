@@ -1,16 +1,12 @@
 var natural = require('natural');
 var tokenizer = new natural.AggressiveTokenizerEs();
 
-
-
 var Twit = require('twit')
 var T = new Twit({
     consumer_key : "S0AENDlf3pPFqqtMMBGrDYB8z",
     consumer_secret : "t20hmQFuJ0eb6KmWcAAxaSoh3PmwjLjmii0Ttrzz3oGksSXXxv",
     access_token : "1186073449569144832-A3h1HusrVTjjlm29QUCIPXPMqRMN38",
     access_token_secret : "rPLFcHAhxd7cwTdOFuxF3bTNd2Wftw9RvqeUV32Mhiqna",
-  //timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
-  //strictSSL:            true,     // optional - requires SSL certificates to be valid.
 })
 
 const fs = require('fs').promises;
@@ -18,7 +14,7 @@ const { ChartJSNodeCanvas }= require('chartjs-node-canvas');
 const width = 1000;   // define width and height of canvas 
 const height = 1000;   
 const chartCallback = (ChartJS) => {
- //console.log('Creando Histograma')
+
 };
 const canvasRenderService = new ChartJSNodeCanvas({width, height, chartCallback});
 const createImage = async (datos,tipoGrafico,op,nombreImagen) => {
@@ -256,16 +252,22 @@ function getTweets2(err, data, response) {
     datos.datasets[0].label = "Histograma de Palabras 2"
     datos.datasets[0].data = ejey_2
     //item 2 a)
-    //createImage(datos,'bar',opciones, "histograma2")
+    createImage(datos,'bar',opciones, "histograma2")
 
     //item 3
     //interseccion de conjuntos
+    console.log("Interseccion de Conjuntos: ")
+    let intersection = conjunto1Tweets.filter (x => conjunto2Tweets.includes (x));
+    console.log(intersection)
+
 
     //item 4
     //union de conjuntos
+    console.log("Union de Conjuntos: ")
+    let union = [...new Set([...conjunto1Tweets, ...conjunto2Tweets])];
+    console.log(union)
 
 
-    
     //console.log(tweetsDate)
     const frecuencia3 = tweetsDate.reduce(function (acc, curr) {
         return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
@@ -293,7 +295,7 @@ function getTweets2(err, data, response) {
     datos.datasets[0].data = ejey_3
     opciones.plugins.title.text = "Grafico del Numero de Tweets por Fecha"
     //item 5
-    //createImage(datos,'line',opciones, "tweetsXfecha")
+    createImage(datos,'line',opciones, "tweetsXfecha")
 
     //console.log(tweetsUser)
     //console.log(tweetsUsuario)
@@ -359,7 +361,7 @@ function getTweets2(err, data, response) {
     opciones.plugins.title.text = "Grafico del Numero de Usuarios que escribieron Tweets por Fecha"
 
     //item 6
-    //createImage(datos,'line',opciones, "usuarioxfecha")
+    createImage(datos,'line',opciones, "usuarioxfecha")
 
       
     const frecuencia5 = tweetsUsuario.reduce(function (acc, curr) {
@@ -396,13 +398,18 @@ function getTweets2(err, data, response) {
     datos.datasets[0].data = ejey_5
     opciones.plugins.title.text = "Grafico del Numero de Tweets por Usuario"
     //item 7
-    //createImage(datos,'line',opciones, "tweetsXusuario")
+    createImage(datos,'line',opciones, "tweetsXusuario")
 
     //item 8
     //diferencia conjunto1 tweets - conjunto 2 tweets
+    console.log("Diferencia de Conjunto 1 - Conjunto 2 es : ")
+    let difference1 = conjunto1Tweets.filter(x => !conjunto2Tweets.includes(x));
+    console.log(difference1)
+    
     //diferencia conjunto2 tweets - conjunto 1 tweets
-
-
+    console.log("Diferencia de Conjunto 2 - Conjunto 1 es : ")
+    let difference2 = conjunto2Tweets.filter(x => !conjunto1Tweets.includes(x));
+    console.log(difference2)
 
 
 }
